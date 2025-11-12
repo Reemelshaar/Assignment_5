@@ -1,0 +1,58 @@
+DATA:
+  MAX_SAMPLE_INTERVAL: 400
+  MEAN:
+  - 0.485
+  - 0.456
+  - 0.406
+  SEARCH:
+    CENTER_JITTER: 3.5
+    FACTOR: 4.0
+    SCALE_JITTER: 0.5
+    SIZE: 256
+    NUMBER: 1
+  STD:
+  - 0.229
+  - 0.224
+  - 0.225
+  TEMPLATE:
+    CENTER_JITTER: 0
+    FACTOR: 4.0
+    SCALE_JITTER: 0
+    SIZE: 256
+    NUMBER: 2
+  TRAIN:
+    DATASETS_NAME:
+    - lasot_subset
+    DATASETS_RATIO:
+    - 1
+    SUBSET_INFO: ./lasot_subset/subset_info.json        
+    CLASSES:                                       
+    - racing
+    - robot
+    - rubicCube
+    - sepia
+    - shark
+MODEL:
+  ENCODER:
+    TYPE: vit_base_patch16
+    PRETRAIN_TYPE: mae
+  DECODER:
+    DEC_LAYERS: 2
+  HIDDEN_DIM: 256
+  BINS: 4000
+  FEATURE_TYPE: x
+TRAIN:
+  EPOCH: 100
+  SAMPLE_PER_EPOCH: 1000
+  BATCH_SIZE: 64
+  LR: 1e-4
+  LR_DROP_EPOCH: 80
+  NUM_WORKER: 8
+  OPTIMIZER: ADAMW
+  LR_BACKBONE: 1e-5
+  WEIGHT_DECAY: 1e-4
+TEST:
+  EPOCH: 100
+  SEARCH_SIZE: 256
+  TEMPLATE_SIZE: 256
+
